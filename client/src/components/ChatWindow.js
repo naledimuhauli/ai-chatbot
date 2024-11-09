@@ -4,7 +4,7 @@ import './style.css';
 import Message from './Message';
 import Sidebar from './sidebar';
 import InputField from './InputField';
-import MessageIcon from '@mui/icons-material/Message'; // Import the message icon
+import SearchHistory from './searchHistory';
 
 function ChatWindow() {
     const [messages, setMessages] = useState([]);
@@ -26,16 +26,7 @@ function ChatWindow() {
                     <p className="name">Johnson Doe</p>
                     <hr />
                 </div>
-                <div className="blank">
-                    <p className="answer">Get answers in seconds</p>
-                    <span className="text">Create and complete tasks using boards</span>
-                    <div className="serach-history">
-                        <span>Search history</span>
-                        <MessageIcon className="message-icon" />
-                        <h3>No Questions added</h3>
-                        <p>Type your questions below and get answers fast</p>
-                    </div>
-                </div>
+                <SearchHistory />
                 <div className="messages">
                     {messages.map((msg, index) => (
                         <Message key={index} user={msg.user} text={msg.text} />
