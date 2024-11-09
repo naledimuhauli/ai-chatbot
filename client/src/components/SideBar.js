@@ -9,6 +9,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 function Sidebar() {
     return (
         <div className="sidebar">
+            <h2 className="headig">Superpage</h2>
             <ul>
                 <li><ChatIcon /> Chat</li>
                 <li><GroupIcon /> Members</li>
