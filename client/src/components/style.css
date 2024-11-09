@@ -122,6 +122,8 @@
 
 .serach-history span:first-child {
     text-align: left;
+    color: #0c0c0c;
+    font-weight: 500;
 }
 
 .serach-history span:last-child {
@@ -130,7 +132,7 @@
 
 .serach-history .message-icon {
     display: block;
-    font-size: 80px;
+    font-size: 90px;
     color: #4B4B4B;
     text-align: center;
     margin: 20px auto;

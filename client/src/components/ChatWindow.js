@@ -30,8 +30,8 @@ function ChatWindow() {
                     <p className="answer">Get answers in seconds</p>
                     <span className="text">Create and complete tasks using boards</span>
                     <div className="serach-history">
-                        <span>Search history</span><span>Clear Chat History</span>
-                        <MessageIcon className="message-icon" /> {/* Add the message icon */}
+                        <span>Search history</span>
+                        <MessageIcon className="message-icon" />
                         <h3>No Questions added</h3>
                         <p>Type your questions below and get answers fast</p>
                     </div>
