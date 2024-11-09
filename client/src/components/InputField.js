@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
+import './style.css';
 
 function InputField({ onSendMessage }) {
-    const [input, setInput] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (input.trim()) {
-            onSendMessage(input);
-            setInput('');
+    const handleSendClick = () => {
+        if (message.trim()) {
+            onSendMessage(message);
+            setMessage('');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="input-field">
-            <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your message here..."
-            />
-            <button type="submit">Send</button>
-        </form>
+        <div>
+            <div className="input-container">
+                <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write Coding about new HTML Tags"
+                    className="message-input"
+                />
+                <button onClick={handleSendClick} className="send-button">
+                    <i className="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <p className='version'>Superpage AI Chat V1.2</p>
+        </div>
     );
 }
 
