@@ -91,3 +91,60 @@
     margin-top: 0.3rem;
     margin-bottom: 0;
 }
+
+.blank {
+    padding: 0 90px;
+}
+
+.answer {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.text {
+    font-size: 16px;
+    color: #A9A9A9;
+    margin-top: 0;
+}
+
+.serach-history {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.serach-history span {
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+}
+
+.serach-history span:first-child {
+    text-align: left;
+}
+
+.serach-history span:last-child {
+    text-align: right;
+}
+
+.serach-history .message-icon {
+    display: block;
+    font-size: 80px;
+    color: #4B4B4B;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.serach-history h3 {
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+}
+
+.serach-history p {
+    text-align: center;
+    color: #A9A9A9;
+    font-size: 14px;
+    margin-top: 10px;
+}
