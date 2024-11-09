@@ -21,6 +21,10 @@ function ChatWindow() {
 
             {/* Main Chat Area */}
             <div className="main-chat">
+                <div className="navbar">
+                    <p className="name">Johnson Doe</p>
+                    <hr />
+                </div>
                 <div className="messages">
                     {messages.map((msg, index) => (
                         <Message key={index} user={msg.user} text={msg.text} />

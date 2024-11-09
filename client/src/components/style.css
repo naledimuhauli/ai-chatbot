@@ -1,17 +1,16 @@
 .chat-window-container {
     display: grid;
     grid-template-columns: 0.7fr 3.3fr;
-    /* Reduce sidebar width */
     height: 100vh;
-    /* Full viewport height */
     gap: 1rem;
-    /* Space between columns */
 }
 
 .sidebar {
     padding: 1rem;
     background-color: #f0f0f0;
     width: 100%;
+    margin-top: 0;
+    padding-top: 7px;
 }
 
 .sidebar h2 {
@@ -30,16 +29,13 @@
     align-items: center;
     padding: 0.5rem 0;
     font-size: 0.9rem;
-    /* Smaller font size */
     color: #333;
     cursor: pointer;
 }
 
 .sidebar li svg {
     margin-right: 0.5rem;
-    /* Space between icon and text */
     font-size: 1rem;
-    /* Smaller icon size */
 }
 
 .sidebar li.active {
@@ -62,14 +58,36 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    /* Optional background color for main chat */
     padding: 1rem;
     overflow-y: auto;
 }
 
 .messages {
     flex-grow: 1;
-    /* Allows messages to take up available space */
     overflow-y: auto;
     margin-bottom: 1rem;
+}
+
+/* Main Chat Area Navbar */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.navbar .name {
+    margin: 0;
+    font-size: 1.2rem;
+    padding-right: 1rem;
+}
+
+.navbar hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
 }
