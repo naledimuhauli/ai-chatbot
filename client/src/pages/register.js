@@ -49,8 +49,8 @@ function Register() {
             // Send POST request to backend for registration
             const response = await axios.post('http://localhost:5000/auth/register', formData, {
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             });
 
             // Show success message
@@ -59,8 +59,10 @@ function Register() {
             // Clear the form fields
             setFormData({ name: '', email: '', password: '' });
 
-            // Redirect to chat page after registration
-            navigate('/chat');
+            // Redirect to chat page after registration with name passed as state
+            setTimeout(() => {
+                navigate('/chat', { state: { name: formData.name } });
+            }, 2000);  // Optional delay for UX
         } catch (err) {
             console.error('Registration error:', err.response || err.message); // Log exact error for debugging
             setError(err.response?.data?.message || 'Registration failed. Please try again.');

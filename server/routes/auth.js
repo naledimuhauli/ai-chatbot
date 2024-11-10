@@ -23,7 +23,19 @@ const authRoutes = (db) => {
             const insertQuery = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
             db.query(insertQuery, [name, email, hashedPassword], (err, result) => {
                 if (err) return res.status(500).json({ message: 'Error saving user' });
-                res.status(201).json({ message: 'User registered successfully' });
+
+                // Retrieve the newly inserted user details
+                const user = { id: result.insertId, name, email };
+
+                // Generate JWT with user id
+                const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+                // Send response with token and user data
+                res.status(201).json({
+                    message: 'User registered successfully',
+                    token,
+                    user, // Send user data along with the token
+                });
             });
         });
     });
@@ -42,9 +54,18 @@ const authRoutes = (db) => {
             const isMatch = await bcrypt.compare(password, results[0].password);
             if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
 
-            // Generate JWT
-            const token = jwt.sign({ id: results[0].id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            res.json({ token });
+            // Create user object to send back
+            const user = { id: results[0].id, name: results[0].name, email: results[0].email };
+
+            // Generate JWT with user id
+            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            // Send response with token and user data
+            res.json({
+                message: 'Login successful',
+                token,
+                user, // Send user data along with the token
+            });
         });
     });
 
