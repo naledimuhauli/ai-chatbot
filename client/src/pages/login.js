@@ -27,10 +27,11 @@ function Login() {
 
         try {
             const response = await axios.post('http://localhost:5000/auth/login', formData);
-            // Save token to local storage (optional, based on your auth method)
+            // Save token and user details to localStorage
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user)); // Save user data
 
-            // Redirect to chat application or dashboard
+            // Redirect to chat or dashboard page
             navigate('/chat');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed. Please try again.');

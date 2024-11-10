@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
@@ -46,8 +46,12 @@ function Register() {
         }
 
         try {
-            // Send POST request to backend
-            const response = await axios.post('http://localhost:5000/auth/register', formData);
+            // Send POST request to backend for registration
+            const response = await axios.post('http://localhost:5000/auth/register', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
             // Show success message
             setSuccess(response.data.message || 'Registration successful!');
@@ -55,11 +59,10 @@ function Register() {
             // Clear the form fields
             setFormData({ name: '', email: '', password: '' });
 
-            // Redirect to login page after 2 seconds
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
+            // Redirect to chat page after registration
+            navigate('/chat');
         } catch (err) {
+            console.error('Registration error:', err.response || err.message); // Log exact error for debugging
             setError(err.response?.data?.message || 'Registration failed. Please try again.');
         } finally {
             setIsLoading(false);
@@ -116,6 +119,12 @@ function Register() {
                             </button>
                             {error && <p className="text-danger mt-2">{error}</p>}
                             {success && <p className="text-success mt-2">{success}</p>}
+                            <p className="account mt-3">
+                                Already have an account?{' '}
+                                <span className="login">
+                                    <Link to={'/login'} className="login">Log in</Link>
+                                </span>
+                            </p>
                         </form>
                     </div>
                 </div>
