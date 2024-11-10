@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import '../App.css';
 
-function Registration() {
+function Register() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -39,13 +39,13 @@ function Registration() {
 
         try {
             // Send POST request to backend
-            const response = await axios.post('http://localhost:3000/auth/register', formData);
-            setSuccess(response.data.message); // Display success message
+            const response = await axios.post('http://localhost:5000/auth/register', formData);
+            setSuccess(response.data.message || 'Registration successful!'); // Display success message
 
             // Clear the form fields
             setFormData({ name: '', email: '', password: '' });
 
-            // Redirect to landing page with email passed as state
+            // Redirect to dashboard page with email passed as state
             setTimeout(() => {
                 navigate('/dashboard', { state: { email: formData.email } });
             }, 2000);
@@ -54,16 +54,9 @@ function Registration() {
         }
     };
 
-
-
-
     return (
         <div className="regi">
-
-            <div className='form'>
-                <div className='logo mb-3'>
-                    <img src={logo} alt='logo' />
-                </div>
+            <div className="form">
                 <div className="container-fluid">
                     <div className="col-md-12 d-flex flex-column align-items-center justify-content-center p-0">
                         <h1 className="sign-up mt-3">SIGN UP</h1>
@@ -117,4 +110,4 @@ function Registration() {
     );
 }
 
-export default Registration;
+export default Register;

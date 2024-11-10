@@ -1,13 +1,19 @@
 import React from 'react';
 import ChatWindow from './components/chatWindow';
-import './App.css';
-// import 'font-awesome/css/font-awesome.min.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Registration from './pages/register';
 
 
 function App() {
   return (
     <div className="app-container">
-      <ChatWindow />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Registration />} />
+          <Route path="/dashboard" element={<ChatWindow />} />
+        </Routes>
+      </Router>
+
     </div>
   );
 }
