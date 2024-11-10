@@ -13,6 +13,7 @@ function Register() {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,31 +27,42 @@ function Register() {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setIsLoading(true);
 
         // Input validation
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!formData.name || !formData.email || !formData.password) {
             setError('Please fill in all fields');
+            setIsLoading(false);
             return;
         } else if (!emailPattern.test(formData.email)) {
             setError('Please enter a valid email address');
+            setIsLoading(false);
+            return;
+        } else if (formData.password.length < 6) {
+            setError('Password must be at least 6 characters long');
+            setIsLoading(false);
             return;
         }
 
         try {
             // Send POST request to backend
             const response = await axios.post('http://localhost:5000/auth/register', formData);
-            setSuccess(response.data.message || 'Registration successful!'); // Display success message
+
+            // Show success message
+            setSuccess(response.data.message || 'Registration successful!');
 
             // Clear the form fields
             setFormData({ name: '', email: '', password: '' });
 
-            // Redirect to dashboard page with email passed as state
+            // Redirect to login page after 2 seconds
             setTimeout(() => {
-                navigate('/dashboard', { state: { email: formData.email } });
+                navigate('/login');
             }, 2000);
         } catch (err) {
-            setError(err.response?.data?.message || 'Registration failed');
+            setError(err.response?.data?.message || 'Registration failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -99,7 +111,9 @@ function Register() {
                                 <input type="checkbox" className="form-check-input" id="rememberMe" />
                                 <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
                             </div>
-                            <button type="submit" className="registerBtn">Register</button>
+                            <button type="submit" className="registerBtn" disabled={isLoading}>
+                                {isLoading ? 'Registering...' : 'Register'}
+                            </button>
                             {error && <p className="text-danger mt-2">{error}</p>}
                             {success && <p className="text-success mt-2">{success}</p>}
                         </form>

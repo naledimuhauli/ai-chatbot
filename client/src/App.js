@@ -1,20 +1,17 @@
-import React from 'react';
-import ChatWindow from './components/chatWindow';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Registration from './pages/register';
-
+import Register from './pages/register';
+import Login from './pages/login';
+import Chat from './components/chatWindow';
 
 function App() {
   return (
-    <div className="app-container">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Registration />} />
-          <Route path="/dashboard" element={<ChatWindow />} />
-        </Routes>
-      </Router>
-
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
+    </Router>
   );
 }
 

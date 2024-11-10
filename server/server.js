@@ -1,52 +1,32 @@
-// Import required modules
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
+const mysql = require('mysql2');
 const cors = require('cors');
-const mysql = require('mysql2/promise');
-const dotenv = require('dotenv');
-const authRoutes = require('./routes/auth'); // Ensure this path is correct
+const authRoutes = require('./routes/auth');
 
-// Load environment variables from .env file
-dotenv.config();
-
-// Initialize Express app
 const app = express();
-
-// Middleware setup
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
-// Database Connection
-const db = mysql.createPool({
+// MySQL Database Connection
+const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
 });
 
-// Test Database Connection
-async function testDatabaseConnection() {
-    try {
-        await db.getConnection();
-        console.log('Connected to database successfully!');
-    } catch (error) {
-        console.error('Failed to connect to the database:', error.message);
+// Connect to the database
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection failed:', err.stack);
+        return;
     }
-}
-
-// Call the function to test the connection
-testDatabaseConnection();
-
-// Routes
-app.use('/api/auth', authRoutes);
-
-// Root Route
-app.get('/', (req, res) => {
-    res.send('Welcome to the API!');
+    console.log('Database connected successfully');
 });
 
-// Start server
+// Use the routes
+app.use('/auth', authRoutes(db)); // Pass the DB connection to auth routes
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-module.exports = { app, db };
