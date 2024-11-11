@@ -190,10 +190,12 @@
 
 .send-button i {
     font-size: 20px;
+    margin-right: 5px;
+    color: rgb(156, 156, 156);
 }
 
 .send-button:hover {
-    color: #4CAF50;
+    color: #0e0e0e;
 }
 
 .version {

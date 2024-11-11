@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import BoltIcon from '@mui/icons-material/Bolt';
 
 function Register() {
     const navigate = useNavigate();
@@ -76,7 +77,10 @@ function Register() {
             <div className="form">
                 <div className="container-fluid">
                     <div className="col-md-12 d-flex flex-column align-items-center justify-content-center p-0">
-                        <h1 className="sign-up mt-3">SIGN UP</h1>
+                        <h1 className="headig">
+                            <BoltIcon sx={{ color: 'purple', fontSize: 40 }} /> Superpage
+                        </h1>
+                        <h3 className="sign-up">SIGN UP</h3>
                         <p className="create">Create an account to get started</p>
                         <form className="w-75 mt-3" onSubmit={handleSubmit}>
                             <div className="mb-3 inputForm">

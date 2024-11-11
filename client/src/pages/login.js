@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css';
+import BoltIcon from '@mui/icons-material/Bolt';
 
 function Login() {
     const navigate = useNavigate();
@@ -41,12 +43,15 @@ function Login() {
     };
 
     return (
-        <div className="login">
+        <div className="regi">
             <div className="form">
                 <div className="container-fluid">
                     <div className="col-md-12 d-flex flex-column align-items-center justify-content-center p-0">
-                        <h1 className="sign-in mt-3">SIGN IN</h1>
-                        <p className="welcome">Welcome back! Please sign in to continue.</p>
+                        <h2 className="headig">
+                            <BoltIcon sx={{ color: 'purple', fontSize: 30 }} /> Superpage
+                        </h2>
+                        <h3 className="sign-up">SIGN IN</h3>
+                        <p className="create">Welcome back! Please sign in to continue.</p>
                         <form className="w-75 mt-3" onSubmit={handleSubmit}>
                             <div className="mb-3 inputForm">
                                 <input
@@ -70,7 +75,7 @@ function Login() {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="loginBtn" disabled={isLoading}>
+                            <button type="submit" className="registerBtn" disabled={isLoading}>
                                 {isLoading ? 'Signing in...' : 'Login'}
                             </button>
                             {error && <p className="text-danger mt-2">{error}</p>}

@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
-const axios = require('axios');
+const OpenAI = require("openai");
 
 const app = express();
 app.use(express.json());
@@ -29,26 +29,19 @@ db.connect((err) => {
 // Use the routes
 app.use('/auth', authRoutes(db));
 
-// Set up OpenAI API key
-const openAiApiKey = process.env.OPENAI_API_KEY; // Store your OpenAI API key in .env
+// Configure OpenAI API
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 // Function to call OpenAI API
 const getAIResponse = async (prompt) => {
     try {
-        const response = await axios.post(
-            'https://api.openai.com/v1/chat/completions',
-            {
-                model: 'gpt-3.5-turbo', // Specify the model to use
-                messages: [{ role: 'user', content: prompt }]
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${openAiApiKey}`,
-                },
-            }
-        );
-        return response.data.choices[0].message.content; // Extract the AI's response
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: prompt }],
+        });
+        return response.choices[0].message.content;
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
         throw new Error('Failed to generate response');
@@ -84,7 +77,6 @@ app.post('/chat', async (req, res) => {
         res.status(500).json({ error: 'Error generating AI response' });
     }
 });
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
