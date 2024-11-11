@@ -202,3 +202,68 @@
     color: gray;
     text-align: center;
 }
+
+.suggestions-container {
+    margin-top: 10px;
+    max-width: 800px;
+    border-radius: 10px;
+    margin-left: 150px;
+}
+
+.suggestions-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.suggestions-list {
+    display: flex;
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.suggestion-item {
+    background-color: rgb(238, 237, 237);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.clear-button {
+    background-color: transparent;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 50%;
+    color: #888;
+    cursor: pointer;
+    font-size: 7px;
+    margin-left: 280px;
+}
+
+.clear-button i {
+    font-size: 13px;
+}
+
+/* Hidden purple message box */
+.hidden-message {
+    position: absolute;
+    width: 100%;
+    max-width: 800px;
+    background-color: rgb(131, 34, 131);
+    color: white;
+    padding: 7px;
+    margin-left: 130px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 10px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.hidden-message p {
+    margin: 0;
+}
+
+.report {
+    text-decoration: underline;
+}
