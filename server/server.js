@@ -27,32 +27,30 @@ db.connect((err) => {
 });
 
 // Use the routes
-app.use('/auth', authRoutes(db)); // Pass the DB connection to auth routes
+app.use('/auth', authRoutes(db));
 
-// Set up Google AI API key
-const apiKey = process.env.GOOGLE_API_KEY; // Store your API key in .env file
+// Set up OpenAI API key
+const openAiApiKey = process.env.OPENAI_API_KEY; // Store your OpenAI API key in .env
 
-// Function to call Google AI API using your API key
+// Function to call OpenAI API
 const getAIResponse = async (prompt) => {
     try {
         const response = await axios.post(
-            'https://language.googleapis.com/v1/documents:analyzeSentiment', // Example endpoint for Google Cloud Natural Language API
+            'https://api.openai.com/v1/chat/completions',
             {
-                document: {
-                    content: prompt,
-                    type: 'PLAIN_TEXT',
-                },
+                model: 'gpt-3.5-turbo', // Specify the model to use
+                messages: [{ role: 'user', content: prompt }]
             },
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`, // Use your API key directly here
+                    Authorization: `Bearer ${openAiApiKey}`,
                 },
             }
         );
-        return response.data.documentSentiment; // Adjust depending on the response structure
+        return response.data.choices[0].message.content; // Extract the AI's response
     } catch (error) {
-        console.error('Error calling Google AI API:', error);
+        console.error('Error calling OpenAI API:', error);
         throw new Error('Failed to generate response');
     }
 };
@@ -66,7 +64,7 @@ app.post('/chat', async (req, res) => {
     }
 
     try {
-        // Get AI response from Google AI
+        // Get AI response from OpenAI
         const aiResponse = await getAIResponse(userPrompt);
 
         // Store chat history in MySQL database
@@ -77,15 +75,16 @@ app.post('/chat', async (req, res) => {
                 return res.status(500).json({ error: 'Error saving chat history' });
             }
             console.log('Chat history saved:', results);
-        });
 
-        // Send AI response back to the client
-        res.status(200).json({ aiResponse });
+            // Send AI response back to the client only after saving
+            res.status(200).json({ aiResponse });
+        });
     } catch (error) {
         console.error('Error in chat request:', error);
         res.status(500).json({ error: 'Error generating AI response' });
     }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

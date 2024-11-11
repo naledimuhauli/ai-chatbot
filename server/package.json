@@ -9,7 +9,8 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.4"
+    "mysql2": "^3.11.4",
+    "openai": "^4.71.1"
   },
   "name": "server",
   "version": "1.0.0",
