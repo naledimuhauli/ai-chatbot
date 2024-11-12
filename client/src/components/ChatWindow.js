@@ -7,6 +7,7 @@ import Message from './Message';
 import Sidebar from './sidebar';
 import InputField from './InputField';
 import SearchHistory from './searchHistory';
+import { FaUser } from 'react-icons/fa';
 
 function ChatWindow() {
     const [messages, setMessages] = useState([]);
@@ -49,7 +50,7 @@ function ChatWindow() {
             {/* Main Chat Area */}
             <div className="main-chat">
                 <div className="navbar">
-                    <p className="name">{userName}</p>
+                    <p className="name">{userName} <FaUser /></p>
                     <hr />
                 </div>
                 <SearchHistory />
