@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
-
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 app.use(express.json());
@@ -29,6 +29,43 @@ db.connect((err) => {
 // Use the routes
 app.use('/auth', authRoutes(db));
 
+// Initialize Google Generative AI
+const apiKey = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey);
+
+const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    systemInstruction: "You're an AI assistant. Answer questions in detail but keep responses concise unless specified.",
+});
+
+const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 40,
+    maxOutputTokens: 8192,
+    responseMimeType: "text/plain",
+};
+
+// Helper function to generate AI response
+async function getAIResponse(userPrompt) {
+    try {
+        const chatSession = model.startChat({
+            generationConfig,
+            history: [
+                {
+                    role: "user",
+                    parts: [{ text: userPrompt }],
+                },
+            ],
+        });
+
+        const result = await chatSession.sendMessage(userPrompt);
+        return result.response.text();
+    } catch (error) {
+        console.error("Error generating AI response:", error);
+        throw new Error("Failed to generate AI response");
+    }
+}
 
 // Chat route to handle messages
 app.post('/chat', async (req, res) => {
@@ -39,7 +76,7 @@ app.post('/chat', async (req, res) => {
     }
 
     try {
-        // Get AI response from OpenAI
+        // Get AI response
         const aiResponse = await getAIResponse(userPrompt);
 
         // Store chat history in MySQL database
