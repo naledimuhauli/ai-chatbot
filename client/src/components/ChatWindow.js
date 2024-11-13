@@ -15,10 +15,12 @@ function ChatWindow() {
     const userName = state?.name || 'User';  // Directly use name from state
     const [loading, setLoading] = useState(false);  // State for loading AI responses
     const [error, setError] = useState(null);  // State for API errors
+    const [showSearchHistory, setShowSearchHistory] = useState(true);  // Toggle for search history visibility
 
     const handleSendMessage = async (message) => {
         // Display the user message
         setMessages((prevMessages) => [...prevMessages, { user: 'You', text: message }]);
+        setShowSearchHistory(false);  // Hide search history on message send
 
         try {
             // Indicate loading status
@@ -53,7 +55,9 @@ function ChatWindow() {
                     <p className="name">{userName} <span><FaUser /></span></p>
                     <hr />
                 </div>
-                <SearchHistory />
+
+                {/* Conditionally render SearchHistory */}
+                {showSearchHistory && <SearchHistory />}
 
                 {/* Messages Display */}
                 <div className="messages">
