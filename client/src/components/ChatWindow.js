@@ -50,7 +50,7 @@ function ChatWindow() {
             {/* Main Chat Area */}
             <div className="main-chat">
                 <div className="navbar">
-                    <p className="name">{userName} <FaUser /></p>
+                    <p className="name">{userName} <span><FaUser /></span></p>
                     <hr />
                 </div>
                 <SearchHistory />
