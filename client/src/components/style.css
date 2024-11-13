@@ -159,6 +159,18 @@
     margin-top: 10px;
 }
 
+.msg {
+    border: 1px solid black;
+    max-width: 900px;
+    display: block;
+    margin: auto;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+
 
 .input-container {
     display: flex;
