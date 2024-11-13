@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
-const OpenAI = require("openai");
+
 
 const app = express();
 app.use(express.json());
@@ -29,24 +29,6 @@ db.connect((err) => {
 // Use the routes
 app.use('/auth', authRoutes(db));
 
-// Configure OpenAI API
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-// Function to call OpenAI API
-const getAIResponse = async (prompt) => {
-    try {
-        const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
-        });
-        return response.choices[0].message.content;
-    } catch (error) {
-        console.error('Error calling OpenAI API:', error);
-        throw new Error('Failed to generate response');
-    }
-};
 
 // Chat route to handle messages
 app.post('/chat', async (req, res) => {
