@@ -75,8 +75,8 @@ function Register() {
     return (
         <div className="regi">
             <div className="form">
-                <div className="container-fluid">
-                    <div className="col-md-12 d-flex flex-column align-items-center justify-content-center p-0">
+                <div className="container">
+                    <div className="col-12 d-flex flex-column align-items-center justify-content-center p-0">
                         <h1 className="headig">
                             <BoltIcon sx={{ color: 'purple', fontSize: 40 }} /> Superpage
                         </h1>
@@ -135,7 +135,7 @@ function Register() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
