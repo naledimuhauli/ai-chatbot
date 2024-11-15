@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Message from './Message';
+// import ConversationBubble from './ConversationBubble';
 import Sidebar from './sidebar';
 import InputField from './InputField';
 import SearchHistory from './searchHistory';
@@ -61,9 +62,13 @@ function ChatWindow() {
 
                 {/* Messages Display */}
                 <div className="messages">
-                    {messages.map((msg, index) => (
-                        <Message key={index} user={msg.user} text={msg.text} />
-                    ))}
+                    {messages.length > 0 && (
+                        <div className="conversation-bubble">
+                            {messages.map((msg, index) => (
+                                <Message key={index} user={msg.user} text={msg.text} />
+                            ))}
+                        </div>
+                    )}
                     {loading && <p className="loading-indicator">AI is typing...</p>}
                     {error && <p className="error-message">{error}</p>}
                 </div>

@@ -159,15 +159,24 @@
     margin-top: 10px;
 }
 
-.msg {
-    border: 1px solid black;
-    max-width: 900px;
-    display: block;
-    margin: auto;
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
+
+
+.conversation-bubble {
+    border: 1px solid #ccc;
+    /* Single border around the conversation */
+    padding: 15px;
+    margin: 10px 90px;
+    /* Margin for spacing on sides */
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    /* Background color for the entire conversation */
 }
+
+.message {
+    margin-bottom: 10px;
+    /* Space between user and AI messages */
+}
+
 
 
 
