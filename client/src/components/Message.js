@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.css';
 
 function Message({ user, text }) {
     return (
         <div className={`message ${user === 'AI' ? 'ai' : 'user'}`}>
-            <strong>{user}:</strong> {text}
+            <strong>{user}:</strong>
+            <span dangerouslySetInnerHTML={{ __html: text }} /> {/* Render HTML content safely */}
         </div>
     );
 }

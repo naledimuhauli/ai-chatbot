@@ -4,11 +4,11 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Message from './Message';
-// import ConversationBubble from './ConversationBubble';
 import Sidebar from './sidebar';
 import InputField from './InputField';
 import SearchHistory from './searchHistory';
 import { FaUser } from 'react-icons/fa';
+import { marked } from 'marked'; // To convert markdown to HTML
 
 function ChatWindow() {
     const [messages, setMessages] = useState([]);
@@ -31,8 +31,20 @@ function ChatWindow() {
             // Call the backend API to get AI response
             const response = await axios.post('http://localhost:5000/chat', { userPrompt: message });
 
+            // Convert AI response from Markdown to HTML
+            let aiResponseHTML = marked(response.data.aiResponse);
+
+            // Remove markdown stars and unwanted syntax (bold/italic)
+            aiResponseHTML = aiResponseHTML.replace(/\*\*([^\*]+)\*\*/g, '$1') // Remove **bold**
+                .replace(/\*([^\*]+)\*/g, '$1')   // Remove *italic*
+                .replace(/__([^_]+)__/g, '$1')    // Remove __bold__
+                .replace(/_([^_]+)_/g, '$1');     // Remove _italic_
+
             // Add the AI's response to the messages
-            setMessages((prevMessages) => [...prevMessages, { user: 'AI', text: response.data.aiResponse }]);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { user: 'AI', text: aiResponseHTML }, // Use cleaned text
+            ]);
         } catch (err) {
             // Handle any errors that occur during the API call
             console.error('Error fetching AI response:', err);
