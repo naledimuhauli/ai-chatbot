@@ -1,9 +1,9 @@
-require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -66,6 +66,33 @@ async function getAIResponse(userPrompt) {
         throw new Error("Failed to generate AI response");
     }
 }
+
+// Route to fetch search history from MySQL
+app.get('/api/search-history', (req, res) => {
+    const query = 'SELECT * FROM chat_history ORDER BY timestamp DESC'; // Adjust query if needed
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching search history:', err);
+            return res.status(500).json({ error: 'Error fetching search history' });
+        }
+        res.status(200).json({ searchHistory: results });
+    });
+});
+
+// Route to clear search history from MySQL
+app.delete('/api/clear-history', (req, res) => {
+    const query = 'DELETE FROM chat_history'; // Delete all records from chat_history table
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error clearing search history:', err);
+            return res.status(500).json({ error: 'Error clearing search history' });
+        }
+        console.log('Search history cleared:', results);
+        res.status(200).json({ message: 'Search history cleared successfully' });
+    });
+});
 
 // Chat route to handle messages
 app.post('/chat', async (req, res) => {

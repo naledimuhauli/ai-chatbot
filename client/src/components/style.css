@@ -115,12 +115,12 @@
     margin-top: 0;
 }
 
-.serach-history {
+/* .serach-history {
     border: 1px solid #ddd;
     padding: 10px;
     margin-top: 20px;
     border-radius: 5px;
-}
+} */
 
 .serach-history span {
     display: inline-block;
@@ -152,13 +152,116 @@
     font-size: 20px;
 }
 
-.serach-history p {
+.serach-history .type {
     text-align: center;
     color: #A9A9A9;
     font-size: 14px;
     margin-top: 10px;
 }
 
+.clear-history {
+    font-size: 14px;
+    color: #696868;
+    background-color: #e9e8e8;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.history-entry {
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table .icon-cell {
+    width: 50px;
+    padding-right: 10px;
+}
+
+.question {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 1px;
+    padding-left: 2px;
+    color: #0c0c0c;
+}
+
+.meta {
+    font-size: 12px;
+    color: #777;
+}
+
+.timestamp {
+    color: #777;
+    padding-left: 3px;
+}
+
+/* Icon styling */
+.user-icon {
+    font-size: 40px;
+    color: #4B4B4B;
+}
+
+/* Prevent large padding/margins on small screens */
+@media (max-width: 768px) {
+    .history-grid {
+        grid-template-columns: 1fr;
+        /* Stacks items vertically */
+    }
+
+    .history-entry {
+        padding: 15px;
+        /* Optional, for more padding on smaller screens */
+    }
+}
+
+.serach-history {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 100%;
+    /* Ensure the container takes full width */
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Ensures no content can overflow */
+}
+
+@media (max-width: 768px) {
+    .history-grid {
+        grid-template-columns: 1fr;
+        /* Stacks the items vertically on smaller screens */
+    }
+
+    .history-entry {
+        padding: 15px;
+        /* Add padding if needed */
+    }
+}
 
 
 .conversation-bubble {
