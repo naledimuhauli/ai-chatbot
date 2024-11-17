@@ -50,7 +50,7 @@ function SearchHistory() {
         <span className="text">Create and complete tasks using boards</span>
         <div className="serach-history">
           <div className="d-flex justify-content-between align-items-center">
-            <span>Search history</span>
+            <span className="his">Search history</span>
             {!isHistoryCleared && searchHistory.length > 0 && (
               <button className="clear-history" onClick={handleClearHistory}>
                 Clear Chat History

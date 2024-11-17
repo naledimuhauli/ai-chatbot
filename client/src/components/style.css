@@ -128,10 +128,11 @@
     text-align: center;
 }
 
-.serach-history span:first-child {
-    text-align: left;
+.serach-history .his {
+    align-items: start;
     color: #0c0c0c;
     font-weight: 500;
+    padding-right: 300px;
 }
 
 .serach-history span:last-child {
