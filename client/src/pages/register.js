@@ -63,9 +63,9 @@ function Register() {
             // Redirect to chat page after registration with name passed as state
             setTimeout(() => {
                 navigate('/chat', { state: { name: formData.name } });
-            }, 2000);  // Optional delay for UX
+            }, 2000);
         } catch (err) {
-            console.error('Registration error:', err.response || err.message); // Log exact error for debugging
+            console.error('Registration error:', err.response || err.message);
             setError(err.response?.data?.message || 'Registration failed. Please try again.');
         } finally {
             setIsLoading(false);
