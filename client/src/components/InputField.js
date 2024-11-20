@@ -51,10 +51,10 @@ function InputField({ onSendMessage }) {
                     value={message}
                     onChange={(e) => {
                         setMessage(e.target.value);
-                        setShowSuggestions(e.target.value.trim() !== ''); // Show suggestions when there's input
+                        setShowSuggestions(e.target.value.trim() !== '');
                     }}
-                    onFocus={() => setIsFocused(true)} // Focus event
-                    onBlur={() => setIsFocused(false)} // Blur event
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                     placeholder="Write Coding about new HTML Tags"
                     className="message-input"
                 />

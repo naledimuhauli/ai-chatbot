@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MessageIcon from '@mui/icons-material/Message';
-import PersonIcon from '@mui/icons-material/Person';  // <-- Added import
+import PersonIcon from '@mui/icons-material/Person';
 import './style.css';
 
 function SearchHistory() {
@@ -29,7 +29,7 @@ function SearchHistory() {
   const handleClearHistory = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/clear-history', {
-        method: 'DELETE', // Make sure this is handled correctly on the server side
+        method: 'DELETE',
       });
       if (response.ok) {
         // Clear the local state after clearing history
@@ -67,7 +67,7 @@ function SearchHistory() {
           ) : (
             <div className="history-grid">
               {searchHistory.map((entry, index) => {
-                const timeAgo = Math.round((new Date() - new Date(entry.timestamp)) / 60000); // Calculate time difference in minutes
+                const timeAgo = Math.round((new Date() - new Date(entry.timestamp)) / 60000);
                 return (
                   <div key={index} className="history-entry">
                     <table className="history-table">

@@ -8,7 +8,7 @@ import Sidebar from './sidebar';
 import InputField from './InputField';
 import SearchHistory from './searchHistory';
 import { FaUser } from 'react-icons/fa';
-import { marked } from 'marked'; // To convert markdown to HTML
+import { marked } from 'marked';
 
 function ChatWindow() {
     const [messages, setMessages] = useState([]);
@@ -24,7 +24,6 @@ function ChatWindow() {
         setShowSearchHistory(false);  // Hide search history on message send
 
         try {
-            // Indicate loading status
             setLoading(true);
             setError(null);
 
@@ -57,22 +56,15 @@ function ChatWindow() {
 
     return (
         <div className="chat-window-container">
-            {/* Sidebar */}
             <div className="sidebar">
                 <Sidebar />
             </div>
-
-            {/* Main Chat Area */}
             <div className="main-chat">
                 <div className="navbar">
                     <p className="name">{userName} <span><FaUser /></span></p>
                     <hr />
                 </div>
-
-                {/* Conditionally render SearchHistory */}
                 {showSearchHistory && <SearchHistory />}
-
-                {/* Messages Display */}
                 <div className="messages">
                     {messages.length > 0 && (
                         <div className="conversation-bubble">
@@ -84,8 +76,6 @@ function ChatWindow() {
                     {loading && <p className="loading-indicator">AI is typing...</p>}
                     {error && <p className="error-message">{error}</p>}
                 </div>
-
-                {/* Input Field */}
                 <InputField onSendMessage={handleSendMessage} />
             </div>
         </div>

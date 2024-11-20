@@ -68,7 +68,6 @@
     margin-bottom: 1rem;
 }
 
-/* Main Chat Area Navbar */
 .navbar {
     display: flex;
     flex-direction: column;
@@ -221,22 +220,20 @@
     padding-left: 3px;
 }
 
-/* Icon styling */
+
 .user-icon {
     font-size: 40px;
     color: #4B4B4B;
 }
 
-/* Prevent large padding/margins on small screens */
+
 @media (max-width: 768px) {
     .history-grid {
         grid-template-columns: 1fr;
-        /* Stacks items vertically */
     }
 
     .history-entry {
         padding: 15px;
-        /* Optional, for more padding on smaller screens */
     }
 }
 
@@ -246,39 +243,31 @@
     margin-top: 20px;
     border-radius: 5px;
     width: 100%;
-    /* Ensure the container takes full width */
     box-sizing: border-box;
     overflow: hidden;
-    /* Ensures no content can overflow */
 }
 
 @media (max-width: 768px) {
     .history-grid {
         grid-template-columns: 1fr;
-        /* Stacks the items vertically on smaller screens */
     }
 
     .history-entry {
         padding: 15px;
-        /* Add padding if needed */
     }
 }
 
 
 .conversation-bubble {
     border: 1px solid #ccc;
-    /* Single border around the conversation */
     padding: 15px;
     margin: 10px 90px;
-    /* Margin for spacing on sides */
     border-radius: 8px;
     background-color: #f9f9f9;
-    /* Background color for the entire conversation */
 }
 
 .message {
     margin-bottom: 10px;
-    /* Space between user and AI messages */
 }
 
 
@@ -379,7 +368,6 @@
     font-size: 13px;
 }
 
-/* Hidden purple message box */
 .hidden-message {
     position: absolute;
     width: 100%;

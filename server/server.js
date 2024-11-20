@@ -69,7 +69,7 @@ async function getAIResponse(userPrompt) {
 
 // Route to fetch search history from MySQL
 app.get('/api/search-history', (req, res) => {
-    const query = 'SELECT * FROM chat_history ORDER BY timestamp DESC'; // Adjust query if needed
+    const query = 'SELECT * FROM chat_history ORDER BY timestamp DESC';
 
     db.query(query, (err, results) => {
         if (err) {
